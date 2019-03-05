@@ -2,12 +2,52 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var DeviceManager = (function () {
     function DeviceManager(debug, setStatusClasses) {
+        var _this = this;
+        this.handleMouseEvent = function (e) {
+            _this._body.removeEventListener('mouseover', _this.handleMouseEvent);
+            _this._html.classList.add('is-touch-device');
+            _this._html.classList.remove('is-not-touch-device');
+        };
+        this.handleTouchEvent = function (e) {
+            _this._body.removeEventListener('touchstart', _this.handleTouchEvent);
+            _this._html.classList.add('is-pointer-device');
+            _this._html.classList.remove('is-not-pointer-device');
+        };
         this._isDebug = (debug) ? debug : false;
+        this._html = document.documentElement;
+        this._body = document.body;
         if (setStatusClasses) {
             this.setStatusClasses();
         }
     }
     DeviceManager.prototype.setStatusClasses = function () {
+        this._html.classList.add('has-js');
+        this._html.classList.remove('has-no-js');
+        this._html.classList.add('is-not-pointer-device');
+        this._html.classList.add('is-not-touch-device');
+        this._body.addEventListener('mouseover', this.handleMouseEvent);
+        this._body.addEventListener('touchstart', this.handleTouchEvent);
+        if (DeviceManager.isBlinkEngine) {
+            this._html.classList.add('is-blink');
+        }
+        if (DeviceManager.isChrome) {
+            this._html.classList.add('is-chrome');
+        }
+        if (DeviceManager.isIE) {
+            this._html.classList.add('is-ie');
+        }
+        if (DeviceManager.isEdge) {
+            this._html.classList.add('is-edge');
+        }
+        if (DeviceManager.isFirefox) {
+            this._html.classList.add('is-firefox');
+        }
+        if (DeviceManager.isSafari) {
+            this._html.classList.add('is-safari');
+        }
+        if (DeviceManager.isOpera) {
+            this._html.classList.add('is-opera');
+        }
     };
     DeviceManager.checkChromeStatus = function () {
         var isChrome = false;

@@ -15,8 +15,15 @@ export default class DeviceManager{
     // Blink Engine
     public static isBlinkEngine:Function    = DeviceManager.checkBlinkEngineStatus;
 
+    // Elements
+    private _html:  HTMLElement;
+    private _body:  HTMLElement;
+
     constructor(debug?:boolean, setStatusClasses?:boolean){
         this._isDebug   = (debug) ? debug : false;
+
+        this._html  = document.documentElement;
+        this._body  = document.body;
 
         if(setStatusClasses){
             this.setStatusClasses();
@@ -27,7 +34,54 @@ export default class DeviceManager{
      * Sets custom status classes on the HTML Document.
      */
     private setStatusClasses():void{
+        this._html.classList.add('has-js');
+        this._html.classList.remove('has-no-js');
 
+        this._html.classList.add('is-not-pointer-device');
+        this._html.classList.add('is-not-touch-device');
+
+        this._body.addEventListener('mouseover', this.handleMouseEvent);
+        this._body.addEventListener('touchstart', this.handleTouchEvent);
+
+        if(DeviceManager.isBlinkEngine){
+            this._html.classList.add('is-blink');
+        }
+
+        if(DeviceManager.isChrome){
+            this._html.classList.add('is-chrome');
+        }
+
+        if(DeviceManager.isIE){
+            this._html.classList.add('is-ie');
+        }
+
+        if(DeviceManager.isEdge){
+            this._html.classList.add('is-edge');
+        }
+
+        if(DeviceManager.isFirefox){
+            this._html.classList.add('is-firefox');
+        }
+
+        if(DeviceManager.isSafari){
+            this._html.classList.add('is-safari');
+        }
+
+        if(DeviceManager.isOpera){
+            this._html.classList.add('is-opera');
+        }
+    }
+    
+    private handleMouseEvent:EventListener = (e:Event)=>{
+        this._body.removeEventListener('mouseover', this.handleMouseEvent);
+        this._html.classList.add('is-touch-device');
+        this._html.classList.remove('is-not-touch-device');
+    }
+
+    private handleTouchEvent:EventListener = (e:Event)=>{
+        this._body.removeEventListener('touchstart', this.handleTouchEvent);
+        this._html.classList.add('is-pointer-device');
+        this._html.classList.remove('is-not-pointer-device');
     }
 
     /**
