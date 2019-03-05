@@ -1,0 +1,48 @@
+{
+    "name": "fuel-device-manager",
+    "version": "0.0.1",
+    "description": "A TypeScript module for handling device detection and status classes.",
+    "keywords": [
+        "typescript",
+        "device-management",
+        "device-detection"
+    ],
+    "author": "Kyle Andrews <kylea@page.works> (http://codewithkyle.com)",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pageworks/fuel-device-manager.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Pageworks/fuel-device-manager/issues"
+    },
+    "main": "DeviceManager.js",
+    "types": "./src/global.d.ts",
+    "files": [
+        "lib",
+        "DeviceManager.js",
+        "DeviceManager.js.map"
+    ],
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run precommit"
+        }
+    },
+    "lint-staged": {
+        "linters": {
+            "app/typescript/**.*.ts": "npm run lint:typescript"
+        }
+    },
+    "scripts": {
+        "precommit": "tslint -c .tslintrc.js -p tsconfig.json -t verbose",
+        "compile": "tsc"
+    },
+    "devDependencies": {
+        "husky": "^1.3.1",
+        "lint-staged": "^8.1.5",
+        "tslint": "^5.12.1",
+        "tslint-config-airbnb": "^5.11.1",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.3.3333"
+    }
+}
