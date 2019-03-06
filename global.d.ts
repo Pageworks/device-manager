@@ -6,18 +6,18 @@ declare class DeviceManager{
     constructor(debug?:boolean, setStatusClasses?:boolean);
     
     // Browsers
-    public static isChrome:Function;
-    public static isIE:Function;
-    public static isEdge:Function;
-    public static isFirefox:Function;
-    public static isSafari:Function;
-    public static isOpera:Function;
+    public static isChrome:     boolean;
+    public static isIE:         boolean;
+    public static isEdge:       boolean;
+    public static isFirefox:    boolean;
+    public static isSafari:     boolean;
+    public static isOpera:      boolean;
 
     // Blink Engine
-    public static isBlinkEngine:Function;
+    public static isBlinkEngine:boolean;
 
     // Touch
-    public static supportsTouch:Function;
+    public static supportsTouch:boolean;
 }
 
 

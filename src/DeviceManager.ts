@@ -4,20 +4,6 @@ export default class DeviceManager{
 
     private _isDebug:   boolean;
 
-    // Browsers
-    public static isChrome:Function     = DeviceManager.checkChromeStatus;
-    public static isIE:Function         = DeviceManager.checkInternetExplorerStatus;
-    public static isEdge:Function       = DeviceManager.checkEdgeStatus;
-    public static isFirefox:Function    = DeviceManager.checkFirefoxStatus;
-    public static isSafari:Function     = DeviceManager.checkSafariStatus;
-    public static isOpera:Function      = DeviceManager.checkOperaStatus;
-
-    // Blink Engine
-    public static isBlinkEngine:Function    = DeviceManager.checkBlinkEngineStatus;
-
-    // Touch
-    public static supportsTouch:Function    = DeviceManager.checkTouchSupport;
-
     // Elements
     private _html:  HTMLElement;
     private _body:  HTMLElement;
@@ -40,38 +26,76 @@ export default class DeviceManager{
         this._html.classList.add('has-js');
         this._html.classList.remove('has-no-js');
 
-        this._html.classList.add('is-not-pointer-device');
-        this._html.classList.add('is-not-touch-device');
+        if(this._isDebug){
+            console.log('%c[Device Manager] '+`%cSetting status classes`,'color:#35ffb8','color:#eee');
+        }
 
         this._body.addEventListener('mouseover', this.handleMouseEvent);
         this._body.addEventListener('touchstart', this.handleTouchEvent);
 
+        if(DeviceManager.supportsTouch){
+            this._html.classList.add('is-touch-device');
+            this._html.classList.remove('is-not-touch-device');
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cSupports Touch: %c${ DeviceManager.supportsTouch }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
+        }
+
         if(DeviceManager.isBlinkEngine){
             this._html.classList.add('is-blink');
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cUsing Blink Engine: %c${ DeviceManager.isBlinkEngine }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
         }
 
         if(DeviceManager.isChrome){
             this._html.classList.add('is-chrome');
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cChrome: %c${ DeviceManager.isChrome }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
         }
 
         if(DeviceManager.isIE){
             this._html.classList.add('is-ie');
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cInternet Explorer: %c${ DeviceManager.isIE }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
         }
 
         if(DeviceManager.isEdge){
             this._html.classList.add('is-edge');
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cEdge: %c${ DeviceManager.isEdge }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
         }
 
         if(DeviceManager.isFirefox){
             this._html.classList.add('is-firefox');
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cFirefox: %c${ DeviceManager.isFirefox }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
         }
 
         if(DeviceManager.isSafari){
             this._html.classList.add('is-safari');
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cSafari: %c${ DeviceManager.isSafari }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
         }
 
         if(DeviceManager.isOpera){
             this._html.classList.add('is-opera');
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cOpera: %c${ DeviceManager.isOpera }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
         }
     }
     
@@ -79,64 +103,71 @@ export default class DeviceManager{
         this._body.removeEventListener('mouseover', this.handleMouseEvent);
         this._html.classList.add('is-pointer-device');
         this._html.classList.remove('is-not-pointer-device');
+
+        if(this._isDebug){
+            console.log('%c[Device Manager] '+`%cUser is using a pointer device`,'color:#35ffb8','color:#eee');
+        }
     }
 
     private handleTouchEvent:EventListener = (e:Event)=>{
         this._body.removeEventListener('touchstart', this.handleTouchEvent);
-        this._html.classList.add('is-touch-device');
-        this._html.classList.remove('is-not-touch-device');
+        this._html.classList.add('has-touched');
+
+        if(this._isDebug){
+            console.log('%c[Device Manager] '+`%cUser has touched their device`,'color:#35ffb8','color:#eee');
+        }
     }
 
     /**
      * Checks if the browser is Chrome 1 - 71.
      * @returns `boolean`
      */
-    private static checkChromeStatus():boolean{
+    public static isChrome = (()=>{
         let isChrome = false;
 
         // @ts-ignore
-        if(!!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)){
+        if(!!window.chrome){
             isChrome = true;
         }
 
         return isChrome;
-    }
+    })();
 
     /**
      * Checks if the browser is Edge 20+.
      * @returns `boolean`
      */
-    private static checkEdgeStatus():boolean{
+    private static isEdge =(()=>{
         let isEdge = false;
 
         // @ts-ignore
-        if(!DeviceManager.isIE && !!window.StyleMedia){
+        if(!this.isIE && !!window.StyleMedia){
             isEdge = true;
         }
 
         return isEdge;
-    }
+    })();
 
     /**
      * Checks if the browser is Internet Explorer 6 - 11.
      * @returns `boolean`
      */
-    private static checkInternetExplorerStatus():boolean{
+    private static isIE = (()=>{
         let isIE = false;
 
         // @ts-ignore
-        if(isIE = /*@cc_on!@*/false || !!document.documentMode){
+        if(/*@cc_on!@*/false || !!document.documentMode){
             isIE = true;
         }
 
         return isIE;
-    }
+    })();
 
     /**
      * Checks if the browser is Firefox 1+.
      * @returns `boolean`
      */
-    private static checkFirefoxStatus():boolean{
+    private static isFirefox = (()=>{
         let isFirefox = false;
 
         // @ts-ignore
@@ -145,13 +176,13 @@ export default class DeviceManager{
         }
 
         return isFirefox;
-    }
+    })();
 
     /**
      * Checks if the browser is Safari 3+.
      * @returns `boolean`
      */
-    private static checkSafariStatus():boolean{
+    private static isSafari = (()=>{
         let isSafari = false;
 
         // @ts-ignore
@@ -160,13 +191,13 @@ export default class DeviceManager{
         }
         
         return isSafari;
-    }
+    })();
 
     /**
      * Checks if the browser is Opera 8+.
      * @returns `boolean`
      */
-    private static checkOperaStatus():boolean{
+    private static isOpera = (()=>{
         let isOpera = false;
 
         // @ts-ignore
@@ -175,14 +206,14 @@ export default class DeviceManager{
         }
 
         return isOpera;
-    }
+    })();
 
     /**
      * Checks if the browser is using the Blink Engine.
      * @see https://en.wikipedia.org/wiki/Blink_(browser_engine)
      * @returns `boolean`
      */
-    private static checkBlinkEngineStatus():boolean{
+    private static isBlinkEngine = (()=>{
         let isBlink = false;
 
         // @ts-ignore
@@ -191,13 +222,13 @@ export default class DeviceManager{
         }
         
         return isBlink;
-    }
+    })();
 
     /**
      * Checks if the browser supports touch input.
      * @returns `boolean`
      */
-    private static checkTouchSupport():boolean{
+    private static supportsTouch = (()=>{
         let isTouchSupported = false;
 
         if(('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)){
@@ -205,5 +236,5 @@ export default class DeviceManager{
         }
 
         return isTouchSupported;
-    }
+    })();
 }

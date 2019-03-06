@@ -1,3 +1,9 @@
+# 1.0.0 - 2019-03-06
+
+### Fixes
+
+- Fixes: static functions are called anonymously so they return the booleans value instead of the function itself
+
 # 0.0.4 - 2019-03-05
 
 ### Fixes
