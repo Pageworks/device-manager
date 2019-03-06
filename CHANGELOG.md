@@ -1,3 +1,9 @@
+# 0.0.2 - 2019-03-05
+
+### Fixes
+
+- Fixes: includes the `global.d.ts` file in the npm package
+
 # 0.0.1 - 2019-03-05
 
 ### Adds

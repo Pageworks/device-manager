@@ -1,6 +1,6 @@
 {
     "name": "fuel-device-manager",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A TypeScript module for handling device detection and status classes.",
     "keywords": [
         "typescript",
@@ -17,11 +17,12 @@
         "url": "https://github.com/Pageworks/fuel-device-manager/issues"
     },
     "main": "DeviceManager.js",
-    "types": "./src/global.d.ts",
+    "types": "global.d.ts",
     "files": [
         "lib",
         "DeviceManager.js",
-        "DeviceManager.js.map"
+        "DeviceManager.js.map",
+        "global.d.ts"
     ],
     "husky": {
         "hooks": {

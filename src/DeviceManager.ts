@@ -1,4 +1,4 @@
-import Manager from './global';
+import Manager from '../global';
 
 export default class DeviceManager{
 
