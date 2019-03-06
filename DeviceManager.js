@@ -5,13 +5,13 @@ var DeviceManager = (function () {
         var _this = this;
         this.handleMouseEvent = function (e) {
             _this._body.removeEventListener('mouseover', _this.handleMouseEvent);
-            _this._html.classList.add('is-touch-device');
-            _this._html.classList.remove('is-not-touch-device');
+            _this._html.classList.add('is-pointer-device');
+            _this._html.classList.remove('is-not-pointer-device');
         };
         this.handleTouchEvent = function (e) {
             _this._body.removeEventListener('touchstart', _this.handleTouchEvent);
-            _this._html.classList.add('is-pointer-device');
-            _this._html.classList.remove('is-not-pointer-device');
+            _this._html.classList.add('is-touch-device');
+            _this._html.classList.remove('is-not-touch-device');
         };
         this._isDebug = (debug) ? debug : false;
         this._html = document.documentElement;
@@ -98,6 +98,13 @@ var DeviceManager = (function () {
         }
         return isBlink;
     };
+    DeviceManager.checkTouchSupport = function () {
+        var isTouchSupported = false;
+        if (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
+            isTouchSupported = true;
+        }
+        return isTouchSupported;
+    };
     DeviceManager.isChrome = DeviceManager.checkChromeStatus;
     DeviceManager.isIE = DeviceManager.checkInternetExplorerStatus;
     DeviceManager.isEdge = DeviceManager.checkEdgeStatus;
@@ -105,6 +112,7 @@ var DeviceManager = (function () {
     DeviceManager.isSafari = DeviceManager.checkSafariStatus;
     DeviceManager.isOpera = DeviceManager.checkOperaStatus;
     DeviceManager.isBlinkEngine = DeviceManager.checkBlinkEngineStatus;
+    DeviceManager.supportsTouch = DeviceManager.checkTouchSupport;
     return DeviceManager;
 }());
 exports.default = DeviceManager;

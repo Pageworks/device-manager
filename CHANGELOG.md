@@ -1,3 +1,9 @@
+# 0.0.4 - 2019-03-05
+
+### Fixes
+
+- Fixes: adds public static `supportsTouch` function
+
 # 0.0.3 - 2019-03-05
 
 ### Fixes
