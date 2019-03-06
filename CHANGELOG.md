@@ -1,3 +1,9 @@
+# 0.0.3 - 2019-03-05
+
+### Fixes
+
+- Fixes: includes the static funcitons in the `global.d.ts` file
+
 # 0.0.2 - 2019-03-05
 
 ### Fixes
