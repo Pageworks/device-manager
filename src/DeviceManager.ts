@@ -126,7 +126,7 @@ export default class DeviceManager{
         let isChrome = false;
 
         // @ts-ignore
-        if(!!window.chrome){
+        if(!!window.chrome && (window.StyleMedia === undefined)){
             isChrome = true;
         }
 
@@ -141,7 +141,7 @@ export default class DeviceManager{
         let isEdge = false;
 
         // @ts-ignore
-        if(!this.isIE && !!window.StyleMedia){
+        if(!!window.StyleMedia && !!window.chrome){
             isEdge = true;
         }
 
@@ -156,7 +156,7 @@ export default class DeviceManager{
         let isIE = false;
 
         // @ts-ignore
-        if(/*@cc_on!@*/false || !!document.documentMode){
+        if(!!window.MSInputMethodContext && !!document.documentMode && (window.chrome === undefined)){
             isIE = true;
         }
 

@@ -4,10 +4,13 @@
     "compilerOptions": {
         "outDir": "./",
         "sourceMap": true,
-        "noImplicitAny": true,
-        "removeComments": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "removeComments": false,
+        "isolatedModules": true,
         "target": "es5",
         "module": "commonjs",
+        "moduleResolution": "node",
         "lib": [
             "dom",
             "scripthost",
