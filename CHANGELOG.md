@@ -1,3 +1,13 @@
+# 1.0.1 - 2019-03-10
+
+### Adds
+
+- Adds: `http-server` and initial `/docs` setup for adding the GitHub demo
+
+### Fixes
+
+- Fixes: issues where the Microsoft browsers were being labeled incorrectly [#4](https://github.com/Pageworks/fuel-device-manager/issues/4)
+
 # 1.0.0 - 2019-03-06
 
 ### Fixes

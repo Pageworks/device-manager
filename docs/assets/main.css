@@ -1,0 +1,52 @@
+body{
+    font-family: sans-serif;
+}
+
+article{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+section{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+div{
+    display: inline-block;
+    position: relative;
+}
+
+ul{
+    background-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(52,52,52, 0.15);
+    border-radius: 4px;
+    padding: 8px 32px;
+    min-width: 256px;
+}
+
+ul li{
+    list-style-type: none;
+    line-height: 48px;
+    font-weight: 600;
+    opacity: 0.87;
+    color: #414141;
+}
+
+span{
+    color: #ff3b3b;
+    font-weight: 400;
+}
+
+span.is-true{
+    color: #3bff55;
+}
