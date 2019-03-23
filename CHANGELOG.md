@@ -1,3 +1,10 @@
+# 1.0.2 - 2019-03-23
+
+### Adds
+
+- Adds: inline documentation
+- Adds: readme documentation
+
 # 1.0.1 - 2019-03-10
 
 ### Adds

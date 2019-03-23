@@ -1,6 +1,6 @@
 {
     "name": "fuel-device-manager",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A TypeScript module for handling device detection and status classes.",
     "keywords": [
         "typescript",

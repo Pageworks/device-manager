@@ -30,9 +30,11 @@ export default class DeviceManager{
             console.log('%c[Device Manager] '+`%cSetting status classes`,'color:#35ffb8','color:#eee');
         }
 
+        // Listen for basic device event types
         this._body.addEventListener('mouseover', this.handleMouseEvent);
         this._body.addEventListener('touchstart', this.handleTouchEvent);
 
+        // Set a status class if the device supports touch
         if(DeviceManager.supportsTouch){
             this._html.classList.add('is-touch-device');
             this._html.classList.remove('is-not-touch-device');
@@ -42,6 +44,7 @@ export default class DeviceManager{
             }
         }
 
+        // Sets a status class if the browser is using the Blink engine
         if(DeviceManager.isBlinkEngine){
             this._html.classList.add('is-blink');
 
@@ -50,6 +53,7 @@ export default class DeviceManager{
             }
         }
 
+        // Sets a status class if the browser is Chrome
         if(DeviceManager.isChrome){
             this._html.classList.add('is-chrome');
 
@@ -58,6 +62,7 @@ export default class DeviceManager{
             }
         }
 
+        // Sets a status class if the browser is IE 11
         if(DeviceManager.isIE){
             this._html.classList.add('is-ie');
 
@@ -66,6 +71,7 @@ export default class DeviceManager{
             }
         }
 
+        // Sets a status class if the browser is Edge
         if(DeviceManager.isEdge){
             this._html.classList.add('is-edge');
 
@@ -74,6 +80,7 @@ export default class DeviceManager{
             }
         }
 
+        // Sets a status class if the browser is Firefox
         if(DeviceManager.isFirefox){
             this._html.classList.add('is-firefox');
 
@@ -82,6 +89,7 @@ export default class DeviceManager{
             }
         }
 
+        // Sets a status class if the browser is Safari
         if(DeviceManager.isSafari){
             this._html.classList.add('is-safari');
 
@@ -90,6 +98,7 @@ export default class DeviceManager{
             }
         }
 
+        // Sets a status class if the browser is Opera
         if(DeviceManager.isOpera){
             this._html.classList.add('is-opera');
 
@@ -99,6 +108,10 @@ export default class DeviceManager{
         }
     }
     
+    /**
+     * Called when the `mouseover` event is fired on the body.
+     * Sets a status class confirming that the user is using a pointer device (mouse).
+     */
     private handleMouseEvent:EventListener = (e:Event)=>{
         this._body.removeEventListener('mouseover', this.handleMouseEvent);
         this._html.classList.add('is-pointer-device');
@@ -109,6 +122,10 @@ export default class DeviceManager{
         }
     }
 
+    /**
+     * Called when the `touchstart` event is fired on the body.
+     * Sets a status class confirming that the user is using touch input.
+     */
     private handleTouchEvent:EventListener = (e:Event)=>{
         this._body.removeEventListener('touchstart', this.handleTouchEvent);
         this._html.classList.add('has-touched');
