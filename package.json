@@ -1,5 +1,5 @@
 {
-    "name": "fuel-device-manager",
+    "name": "@codewithkyle/device-manager",
     "version": "1.0.2",
     "description": "A TypeScript module for handling device detection and status classes.",
     "keywords": [
@@ -7,19 +7,20 @@
         "device-management",
         "device-detection"
     ],
-    "author": "Kyle Andrews <kylea@page.works> (http://codewithkyle.com)",
+    "author": "Kyle Andrews <andrewskyle28@gmail.com> (http://codewithkyle.com)",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Pageworks/fuel-device-manager.git"
+        "url": "git+https://github.com/codewithkyle/device-manager.git"
     },
     "bugs": {
-        "url": "https://github.com/Pageworks/fuel-device-manager/issues"
+        "url": "https://github.com/codewithkyle/device-manager/issues"
     },
     "main": "DeviceManager.js",
     "types": "global.d.ts",
     "files": [
         "lib",
+        "src",
         "DeviceManager.js",
         "DeviceManager.js.map",
         "global.d.ts"
@@ -51,6 +52,5 @@
         "typescript": "^3.3.3333",
         "webpack": "^4.29.6",
         "webpack-cli": "^3.2.3"
-    },
-    "dependencies": {}
+    }
 }
