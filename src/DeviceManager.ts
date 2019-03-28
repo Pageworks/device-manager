@@ -38,7 +38,7 @@ export default class DeviceManager{
      */
     private userTouchedElement: EventListener = (e:Event)=>{
         const target = <HTMLElement>e.currentTarget;
-        target.setAttribute('data-touched', "true");
+        target.setAttribute('data-touching', "true");
     }
 
     /**
@@ -47,7 +47,7 @@ export default class DeviceManager{
      */
     private userReleasedTouchedElement: EventListener = (e:Event)=>{
         const target = <HTMLElement>e.currentTarget;
-        target.setAttribute('data-touched', "false");
+        target.setAttribute('data-touching', "false");
     }
 
     /**

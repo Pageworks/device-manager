@@ -8,7 +8,7 @@ var DeviceManager = /** @class */ (function () {
          */
         this.userTouchedElement = function (e) {
             var target = e.currentTarget;
-            target.setAttribute('data-touched', "true");
+            target.setAttribute('data-touching', "true");
         };
         /**
          * Called when the `touchend` or `touchcancel` or `touchleave` event(s) fire on
@@ -16,7 +16,7 @@ var DeviceManager = /** @class */ (function () {
          */
         this.userReleasedTouchedElement = function (e) {
             var target = e.currentTarget;
-            target.setAttribute('data-touched', "false");
+            target.setAttribute('data-touching', "false");
         };
         /**
          * Called when the `mouseover` event is fired on the body.
