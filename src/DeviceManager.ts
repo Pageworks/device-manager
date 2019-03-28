@@ -8,6 +8,9 @@ export default class DeviceManager{
     private _html:  HTMLElement;
     private _body:  HTMLElement;
 
+    // Custom Touch Input
+    private _trackedElements:   Array<Element>;
+
     constructor(debug?:boolean, setStatusClasses?:boolean){
         this._isDebug   = (debug) ? debug : false;
 
@@ -16,6 +19,124 @@ export default class DeviceManager{
 
         if(setStatusClasses){
             this.setStatusClasses();
+        }
+
+        this._trackedElements   = [];
+        this.getTouchElements();
+    }
+
+    /**
+     * Called when the page has changed and `DeviceManager` needs to handle the new/old touch tracked elements.
+     */
+    public reinit():void{
+        this.purgeTouchElements();
+        this.getTouchElements();
+    }
+
+    /**
+     * Called when the `touchstart` event fires on an element that has a `js-touch` class.
+     */
+    private userTouchedElement: EventListener = (e:Event)=>{
+        const target = <HTMLElement>e.currentTarget;
+        target.setAttribute('data-touching', "true");
+    }
+
+    /**
+     * Called when the `touchend` or `touchcancel` or `touchleave` event(s) fire on
+     * an element with the `js-touch` class.
+     */
+    private userReleasedTouchedElement: EventListener = (e:Event)=>{
+        const target = <HTMLElement>e.currentTarget;
+        target.setAttribute('data-touching', "false");
+    }
+
+    /**
+     * Get all the elements that require touch tracking if they're not already tracked.
+     */
+    private getTouchElements():void{
+        // Do nothing on non-touch devices
+        if(!DeviceManager.supportsTouch){
+            return;
+        }
+
+        // Create an array of elements with the `.js-touch` class if they're not already tracked
+        const elements:Array<Element> = Array.from(document.body.querySelectorAll('.js-touch:not([data-touch-tracked="true"])'));
+
+        elements.forEach((el)=>{
+            // Sets tracking attribute
+            el.setAttribute('data-touch-tracked', 'true');
+
+            // Sets event listeners
+            el.addEventListener('touchstart', this.userTouchedElement );
+            el.addEventListener('touchend', this.userReleasedTouchedElement );
+            el.addEventListener('touchleave', this.userReleasedTouchedElement );
+            el.addEventListener('touchcancel', this.userReleasedTouchedElement );
+
+            // Places element in the arrray
+            this._trackedElements.push(el);
+        });
+    }
+
+    /**
+     * Grabs all the current touch elements and removes any that are missing in the DOM.
+     */
+    private purgeTouchElements(): void{
+
+        // Do nothing on non-touch devices
+        if(!DeviceManager.supportsTouch){
+            return;
+        }
+
+        // Check if there are elements to check
+        if(this._trackedElements.length === 0){
+            return;
+        }
+
+        const currentElements:Array<Element> = Array.from(document.body.querySelectorAll('.js-touch'));
+        const deadElements:Array<Element> = [];
+
+        // Loop through all tracked touch elements
+        for(let i = 0; i < this._trackedElements.length; i++){
+            let survived = false;
+
+            // Compare aginst all current touch elements
+            for(let k = 0; k < currentElements.length; k++){
+                if(this._trackedElements[i] === currentElements[k]){
+                    survived = true;
+                }
+            }
+
+            // Prepare dead elements for the purge
+            if(!survived){
+                deadElements.push(this._trackedElements[i]);
+            }
+        }
+
+        // Verify we have elements to remove
+        if(deadElements.length !== 0){
+
+            // Loop though all the elements we need to remove
+            for(let k = 0; k < deadElements.length; k++){
+
+                // Loop through all the current elements
+                for(let i = 0; i < this._trackedElements.length; i++){
+
+                    // Check if the current element matches the element marked for death
+                    if(this._trackedElements[i] === deadElements[i]){
+                        // Remove event listeners
+                        deadElements[i].removeEventListener('touchstart', this.userTouchedElement );
+                        deadElements[i].removeEventListener('touchend', this.userReleasedTouchedElement );
+                        deadElements[i].removeEventListener('touchleave', this.userReleasedTouchedElement );
+                        deadElements[i].removeEventListener('touchcancel', this.userReleasedTouchedElement );
+
+                        // Get the elements index
+                        const index = this._trackedElements.indexOf(this._trackedElements[i]);
+
+                        // Splice the array at the index and shift the remaining elements
+                        this._trackedElements.splice(index, 1);
+                    }
+                }
+            }
         }
     }
 

@@ -18,6 +18,9 @@ declare class DeviceManager{
 
     // Touch
     public static supportsTouch:boolean;
+
+    // Custom Touch Tracking
+    public reinit:Function;
 }
 
 

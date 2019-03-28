@@ -1,3 +1,17 @@
+# 1.1.0 - 2019-03-28
+
+### Adds
+
+- Adds: custom element touch tracking via the `.js-touch` class
+- Adds: touch events set the  `data-touched` attribute to `true` or `false` based on if the user is touching the element
+- Adds: custom SASS mixin for using the `data-touched` attribute as a custom `:hover` alternative for touch devices
+- Adds: new public `reinit()` method that can be used to purge old touch elements after a page transition
+- Adds: updates demo to showcase the ability to dynamically manage custom touch inputs using `Pjax` and the `reinit()` method
+
+### Fixes
+
+- Fixes: updates readme to include documentation and example of the new touch tracking system
+
 # 1.0.2 - 2019-03-23
 
 ### Adds

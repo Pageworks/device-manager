@@ -1,41 +1,59 @@
 import DeviceManager from '../DeviceManager';
+import Pjax from '@codewithkyle/pjax';
 
 (function(){
-    new DeviceManager(true, true);
+    new Pjax({debug: true});
+    const dm = new DeviceManager(true, true);
+
+    document.addEventListener('pjax:complete', ()=>{
+        dm.reinit();
+    });
 
     if(DeviceManager.isChrome){
-        var input = document.body.querySelector('.js-chrome .js-status');
-        input.classList.add('is-true');
-        input.innerHTML = 'true';
+        var target = document.body.querySelector('.js-chrome');
+        target.classList.add('is-true');
+        const status = target.querySelector('.js-status');
+        status.innerHTML = 'Chrome Detected';
+        status.classList.add('is-true');
     }
 
     if(DeviceManager.isEdge){
-        var input = document.body.querySelector('.js-edge .js-status');
-        input.classList.add('is-true');
-        input.innerHTML = 'true';
+        var target = document.body.querySelector('.js-edge');
+        target.classList.add('is-true');
+        const status = target.querySelector('.js-status');
+        status.innerHTML = 'Edge Detected';
+        status.classList.add('is-true');
     }
 
     if(DeviceManager.isIE){
-        var input = document.body.querySelector('.js-ie .js-status');
-        input.classList.add('is-true');
-        input.innerHTML = 'true';
+        var target = document.body.querySelector('.js-ie');
+        target.classList.add('is-true');
+        const status = target.querySelector('.js-status');
+        status.innerHTML = 'IE 11 Detected';
+        status.classList.add('is-true');
     }
 
     if(DeviceManager.isFirefox){
-        var input = document.body.querySelector('.js-firefox .js-status');
-        input.classList.add('is-true');
-        input.innerHTML = 'true';
+        var target = document.body.querySelector('.js-firefox');
+        target.classList.add('is-true');
+        const status = target.querySelector('.js-status');
+        status.innerHTML = 'Firefox Detected';
+        status.classList.add('is-true');
     }
 
     if(DeviceManager.isSafari){
-        var input = document.body.querySelector('.js-safari .js-status');
-        input.classList.add('is-true');
-        input.innerHTML = 'true';
+        var target = document.body.querySelector('.js-safari');
+        target.classList.add('is-true');
+        const status = target.querySelector('.js-status');
+        status.innerHTML = 'Safari Detected';
+        status.classList.add('is-true');
     }
 
     if(DeviceManager.isOpera){
-        var input = document.body.querySelector('.js-opera .js-status');
-        input.classList.add('is-true');
-        input.innerHTML = 'true';
+        var target = document.body.querySelector('.js-opera');
+        target.classList.add('is-true');
+        const status = target.querySelector('.js-status');
+        status.innerHTML = 'Opera Detected';
+        status.classList.add('is-true');
     }
 })();
