@@ -5,17 +5,26 @@ export default class DeviceManager{
     private _isDebug:   boolean;
 
     // Elements
-    private _html:  HTMLElement;
-    private _body:  HTMLElement;
+    private _html:HTMLElement;
+    private _body:HTMLElement;
 
     // Custom Touch Input
-    private _trackedElements:   Array<Element>;
+    private _trackedElements:Array<Element>;
+
+    // Device/Connection Information
+    private _navigator:Navigator;
+    public static connection:Manager.NetworkInformation = undefined;
 
     constructor(debug?:boolean, setStatusClasses?:boolean){
         this._isDebug   = (debug) ? debug : false;
 
         this._html  = document.documentElement;
         this._body  = document.body;
+
+        this._navigator = window.navigator;
+        // @ts-ignore
+        DeviceManager.connection = this._navigator.connection || this._navigator.mozConnection || this._navigator.webkitConnection;
+        DeviceManager.connection.addEventListener('change', this.handleConnectionChange);
 
         if(setStatusClasses){
             this.setStatusClasses();
@@ -48,6 +57,12 @@ export default class DeviceManager{
     private userReleasedTouchedElement: EventListener = (e:Event)=>{
         const target = <HTMLElement>e.currentTarget;
         target.setAttribute('data-touching', "false");
+    }
+
+    private handleConnectionChange:EventListener = (e:Event)=>{
+        this._navigator = window.navigator;
+        // @ts-ignore
+        DeviceManager.connection = this._navigator.connection || this._navigator.mozConnection || this._navigator.webkitConnection;
     }
 
     /**
@@ -275,7 +290,7 @@ export default class DeviceManager{
      * Checks if the browser is Edge 20+.
      * @returns `boolean`
      */
-    private static isEdge =(()=>{
+    public static isEdge =(()=>{
         let isEdge = false;
 
         // @ts-ignore
@@ -290,7 +305,7 @@ export default class DeviceManager{
      * Checks if the browser is Internet Explorer 6 - 11.
      * @returns `boolean`
      */
-    private static isIE = (()=>{
+    public static isIE = (()=>{
         let isIE = false;
 
         // @ts-ignore
@@ -305,7 +320,7 @@ export default class DeviceManager{
      * Checks if the browser is Firefox 1+.
      * @returns `boolean`
      */
-    private static isFirefox = (()=>{
+    public static isFirefox = (()=>{
         let isFirefox = false;
 
         // @ts-ignore
@@ -320,7 +335,7 @@ export default class DeviceManager{
      * Checks if the browser is Safari 3+.
      * @returns `boolean`
      */
-    private static isSafari = (()=>{
+    public static isSafari = (()=>{
         let isSafari = false;
 
         // @ts-ignore
@@ -335,7 +350,7 @@ export default class DeviceManager{
      * Checks if the browser is Opera 8+.
      * @returns `boolean`
      */
-    private static isOpera = (()=>{
+    public static isOpera = (()=>{
         let isOpera = false;
 
         // @ts-ignore
@@ -351,7 +366,7 @@ export default class DeviceManager{
      * @see https://en.wikipedia.org/wiki/Blink_(browser_engine)
      * @returns `boolean`
      */
-    private static isBlinkEngine = (()=>{
+    public static isBlinkEngine = (()=>{
         let isBlink = false;
 
         // @ts-ignore
@@ -366,7 +381,7 @@ export default class DeviceManager{
      * Checks if the browser supports touch input.
      * @returns `boolean`
      */
-    private static supportsTouch = (()=>{
+    public static supportsTouch = (()=>{
         let isTouchSupported = false;
 
         if(('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)){
@@ -374,5 +389,20 @@ export default class DeviceManager{
         }
 
         return isTouchSupported;
+    })();
+
+    /**
+     * Attemps to return the devices connection type.
+     * @returns `string`
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation/type
+     */
+    public static getConnectionType = (()=>{
+        let connectionType:string = 'unknown';
+
+        if(DeviceManager.connection !== undefined){
+            connectionType = DeviceManager.connection.type;
+        }
+
+        return connectionType;
     })();
 }

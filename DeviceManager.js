@@ -18,6 +18,11 @@ var DeviceManager = /** @class */ (function () {
             var target = e.currentTarget;
             target.setAttribute('data-touching', "false");
         };
+        this.handleConnectionChange = function (e) {
+            _this._navigator = window.navigator;
+            // @ts-ignore
+            DeviceManager.connection = _this._navigator.connection || _this._navigator.mozConnection || _this._navigator.webkitConnection;
+        };
         /**
          * Called when the `mouseover` event is fired on the body.
          * Sets a status class confirming that the user is using a pointer device (mouse).
@@ -44,6 +49,10 @@ var DeviceManager = /** @class */ (function () {
         this._isDebug = (debug) ? debug : false;
         this._html = document.documentElement;
         this._body = document.body;
+        this._navigator = window.navigator;
+        // @ts-ignore
+        DeviceManager.connection = this._navigator.connection || this._navigator.mozConnection || this._navigator.webkitConnection;
+        DeviceManager.connection.addEventListener('change', this.handleConnectionChange);
         if (setStatusClasses) {
             this.setStatusClasses();
         }
@@ -200,6 +209,7 @@ var DeviceManager = /** @class */ (function () {
             }
         }
     };
+    DeviceManager.connection = undefined;
     /**
      * Checks if the browser is Chrome 1 - 71.
      * @returns `boolean`
@@ -295,6 +305,18 @@ var DeviceManager = /** @class */ (function () {
             isTouchSupported = true;
         }
         return isTouchSupported;
+    })();
+    /**
+     * Attemps to return the devices connection type.
+     * @returns `string`
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation/type
+     */
+    DeviceManager.getConnectionType = (function () {
+        var connectionType = 'unknown';
+        if (DeviceManager.connection !== undefined) {
+            connectionType = DeviceManager.connection.type;
+        }
+        return connectionType;
     })();
     return DeviceManager;
 }());
