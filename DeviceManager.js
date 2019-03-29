@@ -18,6 +18,10 @@ var DeviceManager = /** @class */ (function () {
             var target = e.currentTarget;
             target.setAttribute('data-touching', "false");
         };
+        /**
+         * Called when the `change` event is fired on `NetworkInformation`.
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation#Event_handlers
+         */
         this.handleConnectionChange = function (e) {
             _this._navigator = window.navigator;
             // @ts-ignore
