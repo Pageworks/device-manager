@@ -57,11 +57,11 @@ import Pjax from '@codewithkyle/pjax';
         status.classList.add('is-true');
     }
 
-    if(DeviceManager.getConnectionType !== 'unknown'){
+    if(DeviceManager.connection !== undefined){
         var target = document.body.querySelector('.js-connection');
         target.classList.add('is-true');
         const status = target.querySelector('.js-status');
-        status.innerHTML = `${ DeviceManager.getConnectionType } Connection`;
+        status.innerHTML = `${ DeviceManager.connection.effectiveType } Connection`;
         status.classList.add('is-true');
     }
 })();

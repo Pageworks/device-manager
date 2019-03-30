@@ -23,7 +23,7 @@ declare class DeviceManager{
     public reinit:Function;
 
     // Network Information
-    public static getConnectionType:    string;
+    public static connection: DeviceManager.NetworkInformation;
 }
 
 declare namespace DeviceManager{

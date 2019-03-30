@@ -248,11 +248,11 @@ export default class DeviceManager{
         }
 
         // Sets a status class if the device's connection type is known
-        if(DeviceManager.getConnectionType !== 'unknown'){
-            this._html.classList.add(`is-${ DeviceManager.getConnectionType }`);
+        if(DeviceManager.connection !== undefined){
+            this._html.classList.add(`is-${ DeviceManager.connection.effectiveType }`);
 
             if(this._isDebug){
-                console.log('%c[Device Manager] '+`%cConnection Type: %c${ DeviceManager.getConnectionType }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+                console.log('%c[Device Manager] '+`%cConnection Type: %c${ DeviceManager.connection.effectiveType }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
             }
         }
     }
@@ -402,20 +402,5 @@ export default class DeviceManager{
         }
 
         return isTouchSupported;
-    })();
-
-    /**
-     * Attemps to return the devices connection type.
-     * @returns `string`
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation/type
-     */
-    public static getConnectionType = (()=>{
-        let connectionType:string = 'unknown';
-
-        if(DeviceManager.connection !== undefined){
-            connectionType = DeviceManager.connection.type;
-        }
-
-        return connectionType;
     })();
 }
