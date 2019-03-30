@@ -152,6 +152,14 @@ __webpack_require__.r(__webpack_exports__);
         status.innerHTML = 'Opera Detected';
         status.classList.add('is-true');
     }
+
+    if(_DeviceManager__WEBPACK_IMPORTED_MODULE_0___default.a.getConnectionType !== 'unknown'){
+        var target = document.body.querySelector('.js-connection');
+        target.classList.add('is-true');
+        const status = target.querySelector('.js-status');
+        status.innerHTML = `${ _DeviceManager__WEBPACK_IMPORTED_MODULE_0___default.a.getConnectionType }`;
+        status.classList.add('is-true');
+    }
 })();
 
 /***/ }),
@@ -169,7 +177,7 @@ var DeviceManager = /** @class */ (function () {
          */
         this.userTouchedElement = function (e) {
             var target = e.currentTarget;
-            target.setAttribute('data-touched', "true");
+            target.setAttribute('data-touching', "true");
         };
         /**
          * Called when the `touchend` or `touchcancel` or `touchleave` event(s) fire on
@@ -177,7 +185,16 @@ var DeviceManager = /** @class */ (function () {
          */
         this.userReleasedTouchedElement = function (e) {
             var target = e.currentTarget;
-            target.setAttribute('data-touched', "false");
+            target.setAttribute('data-touching', "false");
+        };
+        /**
+         * Called when the `change` event is fired on `NetworkInformation`.
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation#Event_handlers
+         */
+        this.handleConnectionChange = function (e) {
+            _this._navigator = window.navigator;
+            // @ts-ignore
+            DeviceManager.connection = _this._navigator.connection || _this._navigator.mozConnection || _this._navigator.webkitConnection;
         };
         /**
          * Called when the `mouseover` event is fired on the body.
@@ -205,6 +222,10 @@ var DeviceManager = /** @class */ (function () {
         this._isDebug = (debug) ? debug : false;
         this._html = document.documentElement;
         this._body = document.body;
+        this._navigator = window.navigator;
+        // @ts-ignore
+        DeviceManager.connection = this._navigator.connection || this._navigator.mozConnection || this._navigator.webkitConnection;
+        DeviceManager.connection.addEventListener('change', this.handleConnectionChange);
         if (setStatusClasses) {
             this.setStatusClasses();
         }
@@ -360,7 +381,15 @@ var DeviceManager = /** @class */ (function () {
                 console.log('%c[Device Manager] ' + ("%cOpera: %c" + DeviceManager.isOpera), 'color:#35ffb8', 'color:#eee', 'color:#68e5ff');
             }
         }
+        // Sets a status class if the device's connection type is known
+        if (DeviceManager.getConnectionType !== 'unknown') {
+            this._html.classList.add("is-" + DeviceManager.getConnectionType);
+            if (this._isDebug) {
+                console.log('%c[Device Manager] ' + ("%cConnection Type: %c" + DeviceManager.getConnectionType), 'color:#35ffb8', 'color:#eee', 'color:#68e5ff');
+            }
+        }
     };
+    DeviceManager.connection = undefined;
     /**
      * Checks if the browser is Chrome 1 - 71.
      * @returns `boolean`
@@ -456,6 +485,18 @@ var DeviceManager = /** @class */ (function () {
             isTouchSupported = true;
         }
         return isTouchSupported;
+    })();
+    /**
+     * Attemps to return the devices connection type.
+     * @returns `string`
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation/type
+     */
+    DeviceManager.getConnectionType = (function () {
+        var connectionType = 'unknown';
+        if (DeviceManager.connection !== undefined) {
+            connectionType = DeviceManager.connection.type;
+        }
+        return connectionType;
     })();
     return DeviceManager;
 }());
