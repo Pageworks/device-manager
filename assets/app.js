@@ -153,11 +153,11 @@ __webpack_require__.r(__webpack_exports__);
         status.classList.add('is-true');
     }
 
-    if(_DeviceManager__WEBPACK_IMPORTED_MODULE_0___default.a.getConnectionType !== 'unknown'){
+    if(_DeviceManager__WEBPACK_IMPORTED_MODULE_0___default.a.connection !== undefined){
         var target = document.body.querySelector('.js-connection');
         target.classList.add('is-true');
         const status = target.querySelector('.js-status');
-        status.innerHTML = `${ _DeviceManager__WEBPACK_IMPORTED_MODULE_0___default.a.getConnectionType }`;
+        status.innerHTML = `${ _DeviceManager__WEBPACK_IMPORTED_MODULE_0___default.a.connection.effectiveType } Connection`;
         status.classList.add('is-true');
     }
 })();
@@ -382,10 +382,10 @@ var DeviceManager = /** @class */ (function () {
             }
         }
         // Sets a status class if the device's connection type is known
-        if (DeviceManager.getConnectionType !== 'unknown') {
-            this._html.classList.add("is-" + DeviceManager.getConnectionType);
+        if (DeviceManager.connection !== undefined) {
+            this._html.classList.add("is-" + DeviceManager.connection.effectiveType);
             if (this._isDebug) {
-                console.log('%c[Device Manager] ' + ("%cConnection Type: %c" + DeviceManager.getConnectionType), 'color:#35ffb8', 'color:#eee', 'color:#68e5ff');
+                console.log('%c[Device Manager] ' + ("%cConnection Type: %c" + DeviceManager.connection.effectiveType), 'color:#35ffb8', 'color:#eee', 'color:#68e5ff');
             }
         }
     };
@@ -485,18 +485,6 @@ var DeviceManager = /** @class */ (function () {
             isTouchSupported = true;
         }
         return isTouchSupported;
-    })();
-    /**
-     * Attemps to return the devices connection type.
-     * @returns `string`
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation/type
-     */
-    DeviceManager.getConnectionType = (function () {
-        var connectionType = 'unknown';
-        if (DeviceManager.connection !== undefined) {
-            connectionType = DeviceManager.connection.type;
-        }
-        return connectionType;
     })();
     return DeviceManager;
 }());
