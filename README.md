@@ -18,6 +18,7 @@ Device Manager offers several static functions that can be called to check the u
 | isFirefox           | boolean                 | `false`        |
 | isOpera             | boolean                 | `false`        |
 | isBlinkEngine       | boolean                 | `false`        |
+| connection          | NetworkInformation      | `undefined`    |
 
 ### Using The Custom Touch Class
 In order to fix the annoying sticky `:hover` status on mobile/touch devices Device Manager offers a simple way to track touch classes. To see the custom touch classes in action view the [demo](https://codewithkyle.github.io/device-manager/touch-tes.html) on a device that supports touch input.
