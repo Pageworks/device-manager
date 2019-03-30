@@ -1,3 +1,10 @@
+# 1.2.0 - 2019-03-30
+
+### Adds
+
+- Adds: Public static `DeviceManager.connection` variable that can be used for easily accessing the [NetworkInformation API](https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation)
+- Adds: Custom status classes based on the devices connection type/strength
+
 # 1.1.0 - 2019-03-28
 
 ### Adds

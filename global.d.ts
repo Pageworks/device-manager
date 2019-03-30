@@ -21,9 +21,19 @@ declare class DeviceManager{
 
     // Custom Touch Tracking
     public reinit:Function;
+
+    // Network Information
+    public static connection: DeviceManager.NetworkInformation;
 }
 
-
 declare namespace DeviceManager{
-    
+    interface NetworkInformation{
+        readonly type:          string;
+        readonly effectiveType: string;
+        readonly downlinkMax:   number;
+        readonly downlink:      number;
+        readonly rtt:           number;
+        readonly saveData:      boolean;
+        addEventListener:       (event:string, handler:EventListener)=>{};
+    }
 }

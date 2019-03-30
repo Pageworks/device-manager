@@ -1,6 +1,6 @@
 {
     "name": "@codewithkyle/device-manager",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "A TypeScript module for handling device detection and status classes.",
     "keywords": [
         "typescript",

@@ -19,6 +19,15 @@ var DeviceManager = /** @class */ (function () {
             target.setAttribute('data-touching', "false");
         };
         /**
+         * Called when the `change` event is fired on `NetworkInformation`.
+         * @see https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation#Event_handlers
+         */
+        this.handleConnectionChange = function (e) {
+            _this._navigator = window.navigator;
+            // @ts-ignore
+            DeviceManager.connection = _this._navigator.connection || _this._navigator.mozConnection || _this._navigator.webkitConnection;
+        };
+        /**
          * Called when the `mouseover` event is fired on the body.
          * Sets a status class confirming that the user is using a pointer device (mouse).
          */
@@ -44,6 +53,10 @@ var DeviceManager = /** @class */ (function () {
         this._isDebug = (debug) ? debug : false;
         this._html = document.documentElement;
         this._body = document.body;
+        this._navigator = window.navigator;
+        // @ts-ignore
+        DeviceManager.connection = this._navigator.connection || this._navigator.mozConnection || this._navigator.webkitConnection;
+        DeviceManager.connection.addEventListener('change', this.handleConnectionChange);
         if (setStatusClasses) {
             this.setStatusClasses();
         }
@@ -199,7 +212,15 @@ var DeviceManager = /** @class */ (function () {
                 console.log('%c[Device Manager] ' + ("%cOpera: %c" + DeviceManager.isOpera), 'color:#35ffb8', 'color:#eee', 'color:#68e5ff');
             }
         }
+        // Sets a status class if the device's connection type is known
+        if (DeviceManager.connection !== undefined) {
+            this._html.classList.add("is-" + DeviceManager.connection.effectiveType);
+            if (this._isDebug) {
+                console.log('%c[Device Manager] ' + ("%cConnection Type: %c" + DeviceManager.connection.effectiveType), 'color:#35ffb8', 'color:#eee', 'color:#68e5ff');
+            }
+        }
     };
+    DeviceManager.connection = undefined;
     /**
      * Checks if the browser is Chrome 1 - 71.
      * @returns `boolean`
