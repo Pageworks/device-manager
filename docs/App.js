@@ -56,4 +56,12 @@ import Pjax from '@codewithkyle/pjax';
         status.innerHTML = 'Opera Detected';
         status.classList.add('is-true');
     }
+
+    if(DeviceManager.getConnectionType !== 'unknown'){
+        var target = document.body.querySelector('.js-connection');
+        target.classList.add('is-true');
+        const status = target.querySelector('.js-status');
+        status.innerHTML = `${ DeviceManager.getConnectionType } Connection`;
+        status.classList.add('is-true');
+    }
 })();

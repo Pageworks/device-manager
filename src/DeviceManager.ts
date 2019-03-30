@@ -246,6 +246,15 @@ export default class DeviceManager{
                 console.log('%c[Device Manager] '+`%cOpera: %c${ DeviceManager.isOpera }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
             }
         }
+
+        // Sets a status class if the device's connection type is known
+        if(DeviceManager.getConnectionType !== 'unknown'){
+            this._html.classList.add(`is-${ DeviceManager.getConnectionType }`);
+
+            if(this._isDebug){
+                console.log('%c[Device Manager] '+`%cConnection Type: %c${ DeviceManager.getConnectionType }`,'color:#35ffb8','color:#eee', 'color:#68e5ff');
+            }
+        }
     }
     
     /**
