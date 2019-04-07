@@ -20,8 +20,8 @@ Device Manager offers several static functions that can be called to check the u
 | isBlinkEngine       | boolean                 | `false`        |
 | connection          | NetworkInformation      | `undefined`    |
 
-## Using The Custom Touch Class
-In order to fix the annoying sticky `:hover` status on mobile/touch devices Device Manager offers a simple way to track touch classes. To see the custom touch classes in action view the [demo](https://codewithkyle.github.io/device-manager/touch-tes.html) on a device that supports touch input.
+### Using The Custom Touch Class
+In order to fix the annoying sticky `:hover` status on mobile/touch devices Device Manager offers a simple way to track touch classes. To see the custom touch classes in action view the [demo](https://codewithkyle.github.io/device-manager/touch-test.html) on a device that supports touch input.
 
 #### Working With Custom Touch
 To add the custom touch status tracking to any element just add the `js-touch` class.
@@ -32,13 +32,13 @@ To add the custom touch status tracking to any element just add the `js-touch` c
 ```
 
 #### Styling Raw Touch
-Any element with `js-touch` will recieve a `data-touching` attribute. When the element is being touched by the user the attribute will be `true`, after the first initial touch the attribute will be `false`. You could style elements yourself using the example below.
+Any element with `js-touch` will toggle the `is-touching` status class when the element is being touched by the user. You could style elements yourself using the example below.
 ```
 div{
     border: 2px solid red;
 }
 
-div[data-touching="true"]{
+div.is-touching{
     border-color: blue;
 }
 ```
@@ -47,7 +47,7 @@ div[data-touching="true"]{
 The mixin below allows you to easily manage the style of elements only when they're being touched.
 ```
 @mixin touch{
-    &[data-touching="true"]{
+    &.is-touching{
         @content;
     }
 }
