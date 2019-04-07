@@ -131,11 +131,11 @@ span.is-true{
     user-select: none;
 }
 
-.o-touch-button[data-touching="true"]{
+.o-touch-button.is-touching{
     border-color: #1FB6FF;
 }
 
-.o-touch-button[data-touching="true"] span{
+.o-touch-button.is-touching span{
     color: rgba(31,182,255,0.87);
 }
 

@@ -32,13 +32,13 @@ To add the custom touch status tracking to any element just add the `js-touch` c
 ```
 
 #### Styling Raw Touch
-Any element with `js-touch` will recieve a `data-touching` attribute. When the element is being touched by the user the attribute will be `true`, after the first initial touch the attribute will be `false`. You could style elements yourself using the example below.
+Any element with `js-touch` will toggle the `is-touching` status class when the element is being touched by the user. You could style elements yourself using the example below.
 ```
 div{
     border: 2px solid red;
 }
 
-div[data-touching="true"]{
+div.is-touching{
     border-color: blue;
 }
 ```
@@ -47,7 +47,7 @@ div[data-touching="true"]{
 The mixin below allows you to easily manage the style of elements only when they're being touched.
 ```
 @mixin touch{
-    &[data-touching="true"]{
+    &.is-touching{
         @content;
     }
 }

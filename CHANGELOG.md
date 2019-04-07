@@ -1,3 +1,13 @@
+# 1.2.1 - 2019-04-07
+
+### Adds
+
+- Adds: SASS mixin uses custom `is-touching` class
+
+### Removes
+
+- Removes: SASS mixin no longer uses `data-touched` attribute
+
 # 1.2.0 - 2019-03-30
 
 ### Adds

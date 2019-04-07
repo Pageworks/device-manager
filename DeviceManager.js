@@ -8,7 +8,7 @@ var DeviceManager = /** @class */ (function () {
          */
         this.userTouchedElement = function (e) {
             var target = e.currentTarget;
-            target.setAttribute('data-touching', "true");
+            target.classList.add('is-touching');
         };
         /**
          * Called when the `touchend` or `touchcancel` or `touchleave` event(s) fire on
@@ -16,7 +16,7 @@ var DeviceManager = /** @class */ (function () {
          */
         this.userReleasedTouchedElement = function (e) {
             var target = e.currentTarget;
-            target.setAttribute('data-touching', "false");
+            target.classList.remove('is-touching');
         };
         /**
          * Called when the `change` event is fired on `NetworkInformation`.
