@@ -2,7 +2,7 @@
 A TypeScript module for handling device detection and status classes.
 
 ## Installation
-Add Device Manager to any project using the NPM package `npm i --save fuel-device-manager`. Then import the `DeviceManager` class into your main application file using `import DeviceManager from 'fuel-device-manager'`.
+Add Device Manager to any project using the NPM package `npm i --save @codewithkyle/device-manager`. Then import the `DeviceManager` class into your main application file using `import DeviceManager from '@codewithkyle/device-manager'`.
 
 ## Using Device Manager
 Start by instantiating a new `DeviceManager` class with `new DeviceManager();`. The Device Manager class take two optional parameters. First is a `boolean` for enabling debug mode, by default this value is `false`. The second value is a `boolean` telling Device Manager if you want the status classes added to the `document`, the default value is `false`.
