@@ -1,5 +1,5 @@
 {
-    "name": "@codewithkyle/device-manager",
+    "name": "@pageworks/device-manager",
     "version": "1.2.1",
     "description": "A TypeScript module for handling device detection and status classes.",
     "keywords": [
@@ -7,14 +7,14 @@
         "device-management",
         "device-detection"
     ],
-    "author": "Kyle Andrews <andrewskyle28@gmail.com> (http://codewithkyle.com)",
+    "author": "Pageworks",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/codewithkyle/device-manager.git"
+        "url": "git+https://github.com/pageworks/device-manager.git"
     },
     "bugs": {
-        "url": "https://github.com/codewithkyle/device-manager/issues"
+        "url": "https://github.com/pageworks/device-manager/issues"
     },
     "main": "DeviceManager.js",
     "types": "global.d.ts",
@@ -51,9 +51,7 @@
         "tslint-config-prettier": "^1.18.0",
         "typescript": "^3.3.3333",
         "webpack": "^4.29.6",
-        "webpack-cli": "^3.2.3"
-    },
-    "dependencies": {
-        "@codewithkyle/pjax": "^1.3.0"
+        "webpack-cli": "^3.2.3",
+        "@pageworks/pjax": "^1.3.0"
     }
 }

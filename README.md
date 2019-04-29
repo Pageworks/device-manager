@@ -2,7 +2,18 @@
 A TypeScript module for handling device detection and status classes.
 
 ## Installation
-Add Device Manager to any project using the NPM package `npm i --save @codewithkyle/device-manager`. Then import the `DeviceManager` class into your main application file using `import DeviceManager from '@codewithkyle/device-manager'`.
+
+Download Device Manager via NPM:
+
+```
+npm i --save @pageworks/device-manager
+```
+
+Once the package is installed import the package:
+
+```
+import DeviceManager from '@pageworks/device-manager';
+```
 
 ## Using Device Manager
 Start by instantiating a new `DeviceManager` class with `new DeviceManager();`. The Device Manager class take two optional parameters. First is a `boolean` for enabling debug mode, by default this value is `false`. The second value is a `boolean` telling Device Manager if you want the status classes added to the `document`, the default value is `false`.
@@ -21,7 +32,7 @@ Device Manager offers several static functions that can be called to check the u
 | connection          | NetworkInformation      | `undefined`    |
 
 ### Using The Custom Touch Class
-In order to fix the annoying sticky `:hover` status on mobile/touch devices Device Manager offers a simple way to track touch classes. To see the custom touch classes in action view the [demo](https://codewithkyle.github.io/device-manager/touch-test.html) on a device that supports touch input.
+In order to fix the annoying sticky `:hover` status on mobile/touch devices Device Manager offers a simple way to track touch classes. To see the custom touch classes in action view the [demo](https://pageworks.github.io/device-manager/touch-test.html) on a device that supports touch input.
 
 #### Working With Custom Touch
 To add the custom touch status tracking to any element just add the `js-touch` class.
