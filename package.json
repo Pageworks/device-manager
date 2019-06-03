@@ -1,6 +1,6 @@
 {
     "name": "@pageworks/device-manager",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "A TypeScript module for handling device detection and status classes.",
     "keywords": [
         "typescript",
