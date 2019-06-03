@@ -54,9 +54,16 @@ var DeviceManager = /** @class */ (function () {
         this._html = document.documentElement;
         this._body = document.body;
         this._navigator = window.navigator;
-        // @ts-ignore
-        DeviceManager.connection = this._navigator.connection || this._navigator.mozConnection || this._navigator.webkitConnection;
-        DeviceManager.connection.addEventListener('change', this.handleConnectionChange);
+        try {
+            // @ts-ignore
+            DeviceManager.connection = this._navigator.connection || this._navigator.mozConnection || this._navigator.webkitConnection;
+            DeviceManager.connection.addEventListener('change', this.handleConnectionChange);
+        }
+        catch (e) {
+            if (this._isDebug) {
+                console.error('Failed to setup navigator connection', e);
+            }
+        }
         if (setStatusClasses) {
             this.setStatusClasses();
         }
